@@ -1,0 +1,18 @@
+//  Number of incidents per annum at comps that had >0 (median=4, mean=20)
+// mu =ln(4)=1.386, sigma=sqrt(2·ln(5))=1.795
+incidents_per_aff_comp = truncateLeft(lognormal(1.386, 1.795), 1)
+
+// Worst damage, conditional on  there being any (median=370, mean=8260)
+// mu=ln(370)=5.914, sigma=sqrt(2·ln(8260/370))=2.492
+worst_cond = lognormal(5.914, 2.492)
+
+total_cond = incidents_per_aff_comp * worst_cond
+prob_material_damage = 43% * 16% 
+avg_business_total = total_cond * prob_material_damage
+
+n_businesses = 1.4M
+gbp_to_usd = 1.3
+uk_to_priv = 1.8
+glob_to_uk = 32
+
+bottom_line = avg_business_total * n_businesses * gbp_to_usd * uk_to_priv * glob_to_uk
